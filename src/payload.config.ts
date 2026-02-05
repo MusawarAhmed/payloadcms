@@ -1,4 +1,4 @@
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { postgresAdapter } from '@payloadcms/db-postgres'
 import sharp from 'sharp'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
@@ -20,6 +20,7 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
+    // ... admin config ...
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.
@@ -57,8 +58,10 @@ export default buildConfig({
   },
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
-  db: mongooseAdapter({
-    url: process.env.DATABASE_URL || '',
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.DATABASE_URL || '',
+    },
   }),
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
