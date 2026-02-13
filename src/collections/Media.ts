@@ -23,6 +23,16 @@ export const Media: CollectionConfig = {
     read: anyone,
     update: authenticated,
   },
+  hooks: {
+    beforeChange: [
+      ({ req, operation, data }) => {
+        console.log(`Media ${operation} hook triggered`)
+        console.log('Data:', JSON.stringify(data, null, 2))
+        console.log('File present:', !!req.file)
+        return data
+      },
+    ],
+  },
   fields: [
     {
       name: 'alt',
