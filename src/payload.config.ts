@@ -20,17 +20,6 @@ import { getServerSideURL } from './utilities/getURL'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-// CRITICAL: Validate Env Vars immediately
-if (!process.env.SUPABASE_ACCESS_KEY_ID) {
-  console.error('❌ FATAL ERROR: SUPABASE_ACCESS_KEY_ID is missing in this environment!')
-}
-if (!process.env.SUPABASE_SECRET_ACCESS_KEY) {
-  console.error('❌ FATAL ERROR: SUPABASE_SECRET_ACCESS_KEY is missing in this environment!')
-}
-if (!process.env.SUPABASE_BUCKET_NAME) {
-  console.error('❌ FATAL ERROR: SUPABASE_BUCKET_NAME is missing in this environment!')
-}
-
 export default buildConfig({
   admin: {
     // ... admin config ...
