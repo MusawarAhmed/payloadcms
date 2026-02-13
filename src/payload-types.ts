@@ -268,6 +268,7 @@ export interface Page {
         blockName?: string | null;
         blockType: 'statsSection';
       }
+    | CompaniesSectionBlock
   )[];
   meta?: {
     title?: string | null;
@@ -849,6 +850,23 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CompaniesSectionBlock".
+ */
+export interface CompaniesSectionBlock {
+  title: string;
+  companies?:
+    | {
+        name: string;
+        logo: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'companiesSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1220,6 +1238,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        companiesSection?: T | CompaniesSectionBlockSelect<T>;
       };
   meta?:
     | T
@@ -1316,6 +1335,22 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CompaniesSectionBlock_select".
+ */
+export interface CompaniesSectionBlockSelect<T extends boolean = true> {
+  title?: T;
+  companies?:
+    | T
+    | {
+        name?: T;
+        logo?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
